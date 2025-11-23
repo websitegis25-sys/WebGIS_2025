@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galeri Peta - Oceanography Data Center</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body class="gallery-body">
+
+    <div class="gallery-header">
+        <h2>GALERI LAYOUT PETA</h2>
+        <a href="dashboard.html" class="btn-back">Kembali ke Menu</a>
+    </div>
+
+    <div class="gallery-grid">
+        <div class="gallery-item">
+            <img src="BEJIRROB.png" alt="Kerawanan Banjir Rob" onclick="openModal(this)">
+            <div class="caption">Kerawanan Banjir Rob</div>
+        </div>
+        <div class="gallery-item">
+            <img src="Peta Jarak Dari Garis Pantai.jpg" alt="Jarak Dari Garis Pantai" onclick="openModal(this)">
+            <div class="caption">Jarak Dari Garis Pantai</div>
+        </div>
+        <div class="gallery-item">
+            <img src="Peta Penurunan Muka Tanah.jpg" alt="Penurunan Muka Tanah" onclick="openModal(this)">
+            <div class="caption">Penurunan Muka Tanah</div>
+        </div>
+        <div class="gallery-item">
+            <img src="Peta Jarak Dari Sungai.jpg" alt="Jarak Dari Sungai" onclick="openModal(this)">
+            <div class="caption">Jarak Dari Sungai</div>
+        </div>
+        <div class="gallery-item">
+            <img src="Peta Pasang Air Laut.jpg" alt="Pasang Air Laut" onclick="openModal(this)">
+            <div class="caption">Pasang Air Laut</div>
+        </div>
+        <div class="gallery-item">
+            <img src="Peta Penggunaan Lahan.jpg" alt="Penggunaan Lahan" onclick="openModal(this)">
+            <div class="caption">Penggunaan Lahan</div>
+        </div>
+        <div class="gallery-item">
+            <img src="Peta Ketinggian.jpg" alt="Ketinggian Lahan" onclick="openModal(this)">
+            <div class="caption">Ketinggian Lahan</div>
+        </div>
+        <div class="gallery-item">
+            <img src="Peta Curah Hujan.jpg" alt="Curah Hujan" onclick="openModal(this)">
+            <div class="caption">Curah Hujan</div>
+        </div>
+    </div>
+
+    <div id="imageModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="img01">
+        <div id="caption"></div>
+    </div>
+
+    <script>
+        // Fungsi untuk membuka modal saat gambar diklik
+        function openModal(element) {
+            var modal = document.getElementById("imageModal");
+            var modalImg = document.getElementById("img01");
+            var captionText = document.getElementById("caption");
+            
+            modal.style.display = "block";
+            modalImg.src = element.src; // Mengambil sumber gambar yang diklik
+            captionText.innerHTML = element.alt; // Mengambil deskripsi dari alt text
+        }
+
+        // Fungsi untuk menutup modal
+        function closeModal() {
+            var modal = document.getElementById("imageModal");
+            modal.style.display = "none";
+        }
+
+        // Menutup modal jika user klik di area hitam (bukan di gambarnya)
+        window.onclick = function(event) {
+            var modal = document.getElementById("imageModal");
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+
+</body>
+</html>

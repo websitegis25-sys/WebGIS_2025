@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Oceanography Data Center</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* CSS Tambahan khusus untuk Dashboard Layout (Sudah ada sebelumnya) */
+        .dashboard-container { max-width: 1400px !important; width: 95% !important; }
+        .menu-options { display: grid !important; grid-template-columns: 1fr 1fr 1fr !important; gap: 30px !important; justify-content: center !important; }
+        .menu-card { width: auto !important; min-width: 0 !important; margin: 0 !important; flex: none !important; cursor: default !important; }
+        .menu-card:last-child { grid-column: auto !important; width: auto !important; margin: 0 !important; }
+        @media screen and (max-width: 900px) { .menu-options { grid-template-columns: 1fr !important; } }
+        .menu-card button { cursor: pointer !important; z-index: 10; position: relative; }
+    </style>
+</head>
+<body>
+
+    <div class="login-container dashboard-container">
+        <div class="login-header">
+            <h2>MENU UTAMA</h2>
+            <p class="subtitle">Silakan pilih metode tampilan peta</p>
+        </div>
+
+        <div class="menu-options">
+            <div class="menu-card"> 
+                <h3>🗺️ Peta Interaktif</h3>
+                <p>Akses WebGIS berbasis NextGIS dengan layer interaktif.</p>
+                <button class="btn-login" onclick="openMapChoice()">BUKA NEXTGIS</button>
+            </div>
+
+            <div class="menu-card">
+                <h3>🖼️ Layout Peta</h3>
+                <p>Lihat kumpulan layout peta analisis statis (JPG/PNG).</p>
+                <button class="btn-login btn-secondary" style="background-color: #007bff;" onclick="window.location.href='gallery.html'">LIHAT GALERI</button>
+            </div>
+
+            <div class="menu-card">
+                <h3>👥 Tentang Pembuat</h3>
+                <p>Profil tim penyusun WebGIS dan Data Center.</p>
+                <button class="btn-login btn-info" style="background-color: #17a2b8;" onclick="window.location.href='about.html'">LIHAT PROFIL</button>
+            </div>
+        </div>
+
+        <div class="footer-text">
+            <a href="index.html" style="color: #ccc; text-decoration: none;">&larr; Kembali ke Login</a>
+        </div>
+    </div>
+
+    <div id="mapModal" class="modal">
+        <div class="modal-box">
+            <span class="close-modal" onclick="closeMapChoice()">&times;</span>
+            <h3>Pilih Jenis Peta</h3>
+            <p style="color: #ccc; font-size: 14px; margin-bottom: 20px;">Silakan pilih layer yang ingin ditampilkan:</p>
+            
+            <button class="btn-login" style="margin-bottom: 10px;" 
+                onclick="window.open('https://sukma.nextgis.com/resource/113/display?panel=layers', '_blank'); closeMapChoice();">
+                PETA UTAMA
+            </button>
+
+            <button class="btn-login btn-secondary" style="background-color: #28a745;" 
+                onclick="window.open('https://sukma.nextgis.com/resource/104/display?panel=layers', '_blank'); closeMapChoice();">
+                PETA PARAMETER
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Fungsi membuka modal
+        function openMapChoice() {
+            document.getElementById("mapModal").style.display = "block";
+        }
+
+        // Fungsi menutup modal
+        function closeMapChoice() {
+            document.getElementById("mapModal").style.display = "none";
+        }
+
+        // Menutup modal jika user klik di area gelap (luar kotak)
+        window.onclick = function(event) {
+            var modal = document.getElementById("mapModal");
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+
+</body>
+</html>

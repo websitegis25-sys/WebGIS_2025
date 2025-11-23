@@ -1,0 +1,598 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    /* min-height agar konten panjang bisa discroll di HP */
+    min-height: 100vh; 
+    width: 100%;
+    
+    /* Flexbox untuk menengahkan konten (Login/Menu) */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    
+    /* --- PERBAIKAN BACKGROUND --- */
+    background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop');
+    
+    /* 'fixed' membuat background diam saat discroll (Efek lebih elegan) */
+    background-attachment: fixed; 
+    
+    /* 'cover' tetap dipakai agar menutup layar, tapi 'center' menyeimbangkan */
+    background-size: cover; 
+    background-position: center;
+    
+    /* Mencegah scroll samping yang tidak perlu */
+    overflow-x: hidden; 
+}
+
+/* --- PERBAIKAN SUPAYA HP TIDAK AUTO-ZOOM SAAT KLIK INPUT --- */
+input, select, textarea {
+    /* Font minimal 16px mencegah browser HP melakukan zoom otomatis */
+    font-size: 16px !important; 
+}
+
+/* --- PERBAIKAN BACKGROUND KHUSUS HP --- */
+@media screen and (max-width: 768px) {
+    body {
+        /* Opsional: Di HP, kita bisa geser background sedikit */
+        background-position: center top; 
+        
+        /* Pastikan padding cukup agar konten tidak mepet atas-bawah */
+        padding: 40px 0; 
+        
+        /* Matikan align-items center jika konten lebih tinggi dari layar HP */
+        /* Ini mencegah bagian atas konten terpotong */
+        align-items: flex-start; 
+    }
+    
+    /* Pastikan wadah konten punya jarak dari atas saat di HP */
+    .login-container, .dashboard-container {
+        margin-top: 50px;
+        margin-bottom: 50px;
+    }
+}
+
+.login-container {
+    background: rgba(20, 20, 20, 0.85);
+    backdrop-filter: blur(10px);
+    padding: 40px 35px; /* Sedikit memperlebar padding */
+    border-radius: 12px;
+    width: 100%;
+    max-width: 450px; /* Diperlebar sedikit agar teks muat */
+    text-align: center;
+    color: white;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.login-header h2 {
+    margin-bottom: 5px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    font-size: 26px;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+.login-header .subtitle {
+    font-size: 14px;
+    margin-bottom: 20px;
+    color: #007bff; /* Memberi aksen warna biru pada sub-judul */
+    font-weight: 400;
+    letter-spacing: 0.5px;
+}
+
+/* Style baru untuk teks deskripsi WebGIS */
+.description-box {
+    margin-bottom: 25px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 3px solid #007bff;
+}
+
+.description-box p {
+    font-size: 13px;
+    line-height: 1.6;
+    color: #e0e0e0;
+    text-align: justify; /* Teks rata kanan-kiri agar rapi */
+    font-weight: 300;
+}
+
+.input-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    font-size: 13px;
+    margin-bottom: 8px;
+    color: #ccc;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border: none;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    font-size: 14px;
+    outline: none;
+    transition: 0.3s;
+}
+
+.input-group input::placeholder {
+    color: #888;
+}
+
+.input-group input:focus {
+    background: rgba(255, 255, 255, 0.25);
+    border: 1px solid #007bff;
+}
+
+.btn-login {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 6px;
+    background: #007bff;
+    color: white;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin-top: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn-login:hover {
+    background: #0056b3;
+}
+
+.footer-text {
+    margin-top: 25px;
+    font-size: 12px;
+    color: #666;
+}
+
+/* --- TAMBAHAN CSS UNTUK DASHBOARD & GALERI --- */
+
+/* --- PERBAIKAN TAMPILAN DASHBOARD (3 KARTU SEJAJAR) --- */
+
+.dashboard-container {
+    /* Kita perlebar wadahnya supaya muat 3 kartu berjejer */
+    max-width: 1200px; 
+    width: 95%;
+    padding: 40px;
+    margin: 0 auto;
+}
+
+.menu-options {
+    display: flex; /* Menggunakan Flexbox agar sejajar ke samping */
+    gap: 30px; /* Memberi jarak antar kartu supaya tidak mepet */
+    justify-content: center; /* Posisi di tengah layar */
+    align-items: stretch; /* Menyamakan tinggi semua kartu */
+    margin-top: 30px;
+}
+
+.menu-card {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.15);
+    transition: 0.3s;
+    cursor: pointer;
+    text-align: left;
+    
+    /* --- KUNCI AGAR UKURAN SAMA --- */
+    flex: 1; /* Semua kartu akan membagi ruang sama rata */
+    min-width: 280px; /* Batas minimal agar tulisan tidak tergencet */
+    
+    /* Agar tombol selalu di bawah */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 250px; 
+}
+
+.menu-card:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+
+.menu-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 12px;
+    color: #fff;
+    font-weight: 600;
+}
+
+.menu-card p {
+    font-size: 0.9rem;
+    color: #ccc;
+    margin-bottom: 25px;
+    line-height: 1.5;
+}
+
+.menu-card button {
+    margin-top: auto; 
+    width: 100%;
+}
+
+/* --- HAPUS KODE :last-child YANG LAMA --- */
+/* Kita tidak butuh pengaturan khusus untuk kartu terakhir lagi */
+
+
+/* --- RESPONSIF: JIKA LAYAR KECIL (TABLET/HP) --- */
+@media screen and (max-width: 950px) {
+    .menu-options {
+        flex-wrap: wrap; /* Izinkan kartu turun ke bawah */
+    }
+    
+    .menu-card {
+        /* Di layar kecil, kartu jadi lebar penuh agar mudah dibaca */
+        flex: 0 0 100%; 
+        min-width: 100%;
+    }
+}
+
+/* Gallery Styles */
+.gallery-body {
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 40px;
+    height: auto; /* Allow scrolling */
+    min-height: 100vh;
+    overflow-y: auto; /* Enable vertical scroll */
+}
+
+.gallery-header {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    background: rgba(20, 20, 20, 0.85);
+    padding: 20px;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+}
+
+.gallery-header h2 {
+    color: white;
+    font-size: 24px;
+}
+
+.btn-back {
+    color: #fff;
+    text-decoration: none;
+    padding: 8px 15px;
+    border: 1px solid white;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.btn-back:hover {
+    background: white;
+    color: black;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.gallery-item {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    transition: transform 0.3s;
+}
+
+.gallery-item:hover {
+    transform: scale(1.02);
+    z-index: 10;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    display: block;
+}
+
+.gallery-item .caption {
+    padding: 10px 5px 5px;
+    font-weight: 600;
+    text-align: center;
+    color: #333;
+    font-size: 14px;
+}
+
+/* --- TAMBAHAN UNTUK MODAL (TAMPILAN GAMBAR BESAR) --- */
+
+/* Latar belakang modal (hitam transparan) */
+.modal {
+    display: none; /* Sembunyikan secara default */
+    position: fixed; 
+    z-index: 1000; /* Pastikan dia paling depan */
+    padding-top: 50px; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.9); /* Hitam 90% transparan */
+    backdrop-filter: blur(5px);
+}
+
+/* Gambar di dalam modal */
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 1000px; /* Batas maksimal lebar */
+    max-height: 85vh; /* Batas maksimal tinggi agar tidak scroll berlebih */
+    object-fit: contain;
+    border-radius: 5px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+    animation-name: zoom;
+    animation-duration: 0.4s;
+}
+
+/* Animasi Zoom saat muncul */
+@keyframes zoom {
+    from {transform:scale(0)} 
+    to {transform:scale(1)}
+}
+
+/* Caption (Judul Gambar di Bawah) */
+#caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    height: 150px;
+    font-size: 18px;
+    font-weight: 300;
+}
+
+/* Tombol Close (X) */
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Responsif untuk HP */
+@media only screen and (max-width: 700px){
+    .modal-content {
+        width: 95%;
+    }
+}
+
+/* --- TAMBAHAN UNTUK HALAMAN ABOUT (TENTANG PEMBUAT) --- */
+
+.about-body {
+    flex-direction: column;
+    padding: 40px 20px;
+    height: auto;
+    min-height: 100vh;
+    overflow-y: auto;
+}
+
+.about-container {
+    width: 100%;
+    max-width: 1000px;
+    text-align: center;
+}
+
+.about-header {
+    margin-bottom: 40px;
+    color: white;
+}
+
+.about-header h2 {
+    font-size: 28px;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.about-header p {
+    color: #007bff;
+    font-size: 14px;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+}
+
+.btn-back-small {
+    display: inline-block;
+    padding: 8px 20px;
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 20px;
+    color: #ccc;
+    text-decoration: none;
+    font-size: 12px;
+    transition: 0.3s;
+}
+
+.btn-back-small:hover {
+    background: white;
+    color: black;
+}
+
+/* Grid Profil */
+.profile-grid {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.profile-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    padding: 30px 20px;
+    width: 300px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+    color: white;
+}
+
+.profile-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 25px rgba(0, 123, 255, 0.3);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* Foto Profil Bulat */
+.img-wrapper {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 20px auto;
+    border-radius: 50%;
+    border: 3px solid #007bff;
+    padding: 3px; /* Jarak antara border dan foto */
+    overflow: hidden;
+}
+
+.img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Agar foto tidak gepeng */
+    border-radius: 50%;
+}
+
+.profile-card h3 {
+    font-size: 18px;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.profile-card .nim {
+    font-size: 13px;
+    color: #ccc;
+    letter-spacing: 0.5px;
+}
+
+.divider {
+    height: 2px;
+    width: 30px;
+    background: #007bff;
+    margin: 15px auto;
+    border-radius: 2px;
+}
+
+.profile-card .major {
+    font-size: 14px;
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Style Tambahan untuk Tombol Info di Dashboard */
+.btn-info {
+    background: #17a2b8; /* Warna Biru Laut Muda */
+}
+.btn-info:hover {
+    background: #138496;
+}
+
+/* --- TAMBAHAN UNTUK MODAL PILIHAN PETA (NEXTGIS) --- */
+
+/* Style Kotak Dialog di tengah layar */
+/* --- UPDATE TAMPILAN MODAL DENGAN BACKGROUND PETA --- */
+
+.modal-box {
+    /* Menggunakan 2 layer background: 
+       1. Linear Gradient (Hitam transparan) agar teks terbaca
+       2. URL Gambar Peta Indonesia
+    */
+    background-image: 
+        linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), 
+        url('indo.png'); /* GANTI 'indo-map.jpg' dengan nama file gambar kamu */
+    
+    background-size: cover;      /* Memastikan gambar memenuhi kotak */
+    background-position: center; /* Posisi gambar di tengah */
+    background-repeat: no-repeat;
+    
+    /* Layout kotak */
+    margin: 15% auto;
+    padding: 40px 30px; /* Padding diperbesar sedikit */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Border lebih terang */
+    width: 90%;
+    max-width: 450px;
+    border-radius: 15px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.7); /* Bayangan lebih tebal agar elegan */
+    
+    /* Animasi muncul */
+    animation-name: zoom;
+    animation-duration: 0.4s;
+}
+
+/* Pastikan judul "Pilih Jenis Peta" lebih menonjol */
+.modal-box h3 {
+    color: #fff;
+    margin-bottom: 5px;
+    font-size: 24px;
+    font-weight: 600;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8); /* Efek bayangan teks */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.modal-box p {
+    color: #ddd !important; /* Warna teks deskripsi lebih terang */
+    font-weight: 300;
+}
+
+/* Tombol Close tetap sama */
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: #fff;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    text-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
+
+.close-modal:hover {
+    color: #ff4d4d; /* Merah saat di-hover */
+}
