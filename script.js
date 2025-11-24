@@ -2,19 +2,16 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
     event.preventDefault();
 
     const name = document.getElementById('name').value;
-    const password = document.getElementById('password').value;
 
-    if (name && password) {
-        if (password === "webgis") {
-            // Simpan nama user
-            localStorage.setItem('webgisUser', name);
-            
-            // Arahkan ke Dashboard (Menu Pilihan), BUKAN langsung ke NextGIS
-            window.location.href = "dashboard.html"; 
-        } else {
-            alert("Kata sandi salah! Silakan coba lagi.");
-        }
+    // Cek apakah nama sudah diisi
+    if (name) {
+        // Simpan nama user ke penyimpanan browser
+        localStorage.setItem('webgisUser', name);
+        
+        // Langsung arahkan ke Dashboard
+        window.location.href = "dashboard.html"; 
     } else {
-        alert("Mohon lengkapi nama dan kata sandi!");
+        // Jika nama kosong
+        alert("Mohon masukkan nama anda untuk melanjutkan!");
     }
 });
